@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCheatSheet.CosoleApp", "CSharpCheatSheet.CosoleApp\CSharpCheatSheet.CosoleApp.csproj", "{C66D9FD6-486B-4A79-903E-2BAB169760FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCheatSheed.UnitTests", "CSharpCheatSheed.UnitTests\CSharpCheatSheed.UnitTests.csproj", "{D5B24570-21C1-426E-ADFC-F3E17B24E362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpCheatSheet.Services", "CSharpCheatSheet.Services\CSharpCheatSheet.Services.csproj", "{D8CB4DC9-2718-4B21-9495-B167BD249250}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{C66D9FD6-486B-4A79-903E-2BAB169760FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C66D9FD6-486B-4A79-903E-2BAB169760FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C66D9FD6-486B-4A79-903E-2BAB169760FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5B24570-21C1-426E-ADFC-F3E17B24E362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B24570-21C1-426E-ADFC-F3E17B24E362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B24570-21C1-426E-ADFC-F3E17B24E362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B24570-21C1-426E-ADFC-F3E17B24E362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8CB4DC9-2718-4B21-9495-B167BD249250}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8CB4DC9-2718-4B21-9495-B167BD249250}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8CB4DC9-2718-4B21-9495-B167BD249250}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8CB4DC9-2718-4B21-9495-B167BD249250}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
