@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using Xunit;
 using CSharpCheatSheet.Services;
 using CSharpCheatSheet.Services.Interfaces;
+using Xunit.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace CSharpCheatSheet.UnitTests
 {
     public class AlgorithmUnitTests
-    {
-        public AlgorithmUnitTests()
+    {               
+        public AlgorithmUnitTests(ITestOutputHelper output)
         {
+            Output = output;
+
             //setup our DI
             var serviceProvider = new ServiceCollection()
+                .AddLogging((builder) => builder.AddXUnit(Output))
                 .AddSingleton<IAlgorithmService, AlgorithmService>()
                 .BuildServiceProvider();
 
             //do the actual work here
             AlgorithmService = serviceProvider.GetService<IAlgorithmService>();
+
+            
         }
 
         public IAlgorithmService AlgorithmService { get; set; }
+
+        private ITestOutputHelper Output { get; }
 
         [Theory]
         [InlineData("hit", "cog", null, 5)] // Need to fix to pass list.

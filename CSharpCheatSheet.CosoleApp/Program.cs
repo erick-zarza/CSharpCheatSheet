@@ -1,6 +1,7 @@
 ﻿using CSharpCheatSheet.Services;
 using CSharpCheatSheet.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +15,8 @@ namespace CSharpCheatSheet.ConsoleApp
             IAlgorithmService algorithmService = service.GetService<IAlgorithmService>();
             ICodepediaService codepediaService = service.GetService<ICodepediaService>();
 
-            codepediaService.SampleList();
+            bool onlySelected = true;
+            codepediaService.RunInMain(onlySelected);
 
             //var wordList = new List<string>() { "hot", "dot", "dog", "lot", "log", "cog" };
             //// var result = algorithmService.LadderLength("hit", "cog", wordList);
@@ -27,6 +29,7 @@ namespace CSharpCheatSheet.ConsoleApp
         {
             //setup our DI
             var serviceProvider = new ServiceCollection()
+                .AddLogging()
                 .AddSingleton<IAlgorithmService, AlgorithmService>()
                 .AddSingleton<ICodepediaService, CodepediaService>()
                 .BuildServiceProvider();

@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using CSharpCheatSheet.Services.Interfaces;
-
+using Microsoft.Extensions.Logging;
 
 namespace CSharpCheatSheet.Services
 {
     public class AlgorithmService : IAlgorithmService
     {
+        private readonly ILogger _logger;
+
+        public AlgorithmService(ILogger<AlgorithmService> logger)
+        {
+            _logger = logger;
+        }
+
         // https://leetcode.com/problems/word-ladder-ii/
         // https://leetcode.com/problems/minimum-genetic-mutation/
 
@@ -46,6 +53,8 @@ namespace CSharpCheatSheet.Services
         /// <returns>minimum path to get to end word if any </returns>
         public int LadderLength(string beginWord, string endWord, IList<string> wordList)
         {
+            _logger.LogError("Guey");
+            System.Diagnostics.Debug.WriteLine("guey 2");
             HashSet<string> words = new HashSet<string>(wordList);
             HashSet<string> visited = new HashSet<string>();
             Queue<string> queue = new Queue<string>();

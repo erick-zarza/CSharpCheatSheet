@@ -2,7 +2,8 @@
 {
     public interface ICodepediaService
     {
-        void CheatSheetList();
+        void CheatSheetList();        
+        void RunInMain(bool onlySelected);
         void SampleLinkedListAddLast();
         void SampleLinkedListContains();
         void SampleLinkedListRemove();
