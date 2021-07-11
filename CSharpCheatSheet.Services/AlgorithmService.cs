@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CSharpCheatSheet.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CSharpCheatSheet.Services
 {
@@ -13,6 +14,115 @@ namespace CSharpCheatSheet.Services
         public AlgorithmService(ILogger<AlgorithmService> logger)
         {
             _logger = logger;
+        }
+
+        public void RunInMain(bool onlySelected)
+        {
+            Console.WriteLine("--- Insert Sort");
+            int[] arr2 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+            int[] copyArray2 = new int[10]; // need to copy if one unsorted ref sticks
+            Array.Copy(arr2, copyArray2, 10);
+            int[] arrSorted2 = InsertSort(copyArray2);
+            Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr2)}");
+            Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted2)}\n");
+
+            if (!onlySelected)
+            {
+                Console.WriteLine("--- Selection Sort");
+                int[] arr1 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+                int[] copyArray1 = new int[10]; // need to copy if one unsorted ref sticks
+                Array.Copy(arr1, copyArray1, 10);
+                int[] arrSorted1 = SelectionSort(copyArray1);
+                Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr1)}");
+                Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted1)}\n");
+
+                Console.WriteLine("--- Bubble Sort");
+                int[] arr = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+                int[] copyArray = new int[10]; // need to copy if one unsorted ref sticks
+                Array.Copy(arr, copyArray, 10);
+                int[] arrSorted = BubbleSort(copyArray);
+                Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr)}");
+                Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted)}\n");
+            }
+        }
+
+        public int[] InsertSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            for (int wall = 1; wall < n; wall++)
+            {
+                int unsorted = arr[wall];
+
+                int i;
+                for (i = wall; i > 0 && arr[i - 1] > unsorted; i--)
+                {
+                    arr[i] = arr[i - 1];
+                }
+
+                arr[i] = unsorted;
+            }
+
+            return arr;
+        }
+
+        public int[] SelectionSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            for (int wall = n - 1; wall > 0; wall--)
+            {
+                int sorted = 0;
+                for (int j = sorted + 1; j <= wall; j++)
+                {
+                    // Console.WriteLine($"arr[j] > arr[sorted]: {arr[j]} > {arr[sorted]}");
+                    if (arr[j] > arr[sorted])
+                    {
+                        sorted = j;
+                    }
+                }
+
+                /// Swap
+                if (arr[sorted] > arr[wall])
+                {
+                    int temp = arr[wall];
+                    arr[wall] = arr[sorted];
+                    arr[sorted] = temp;
+                }
+            }
+
+            return arr;
+        }
+
+        public int[] BubbleSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            /// Wall
+            bool swapped;
+            for (int i = n - 1; i > 0; i--)
+            {
+                /// Get first and second; j => last n (wall); j+1 => j < 1
+                swapped = false;
+                for (int j = 0; j < i; j++)
+                {
+                    /// Swap
+                    if (arr[j] > arr[j + 1])
+                    {
+                        int temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped)
+                {
+                    break;
+                }
+            }
+
+            return arr;
         }
 
         // https://leetcode.com/problems/word-ladder-ii/

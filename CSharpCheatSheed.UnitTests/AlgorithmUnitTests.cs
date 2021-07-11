@@ -5,11 +5,12 @@ using CSharpCheatSheet.Services;
 using CSharpCheatSheet.Services.Interfaces;
 using Xunit.Abstractions;
 using Microsoft.Extensions.Logging;
+using FluentAssertions;
 
 namespace CSharpCheatSheet.UnitTests
 {
     public class AlgorithmUnitTests
-    {               
+    {
         public AlgorithmUnitTests(ITestOutputHelper output)
         {
             Output = output;
@@ -23,12 +24,54 @@ namespace CSharpCheatSheet.UnitTests
             //do the actual work here
             AlgorithmService = serviceProvider.GetService<IAlgorithmService>();
 
-            
+
         }
 
         public IAlgorithmService AlgorithmService { get; set; }
 
         private ITestOutputHelper Output { get; }
+
+        [Fact]
+        public void InsertSort_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+
+            // Act
+            int[] sortedArr = AlgorithmService.InsertSort(arr);
+
+            // Assert
+            sortedArr.Should().BeInAscendingOrder();
+
+        }
+
+        [Fact]
+        public void SelectionSort_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+
+            // Act
+            int[] sortedArr = AlgorithmService.SelectionSort(arr);
+
+            // Assert
+            sortedArr.Should().BeInAscendingOrder();
+
+        }
+
+        [Fact]
+        public void BubbleSort_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+
+            // Act
+            int[] sortedArr = AlgorithmService.BubbleSort(arr);
+
+            // Assert
+            sortedArr.Should().BeInAscendingOrder();
+
+        }
 
         [Theory]
         [InlineData("hit", "cog", null, 5)] // Need to fix to pass list.

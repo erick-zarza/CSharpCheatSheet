@@ -1,4 +1,6 @@
-﻿namespace CSharpCheatSheet.Services.Interfaces
+﻿using System.Collections.Generic;
+
+namespace CSharpCheatSheet.Services.Interfaces
 {
     public interface ICodepediaService
     {
@@ -8,5 +10,7 @@
         void SampleLinkedListContains();
         void SampleLinkedListRemove();
         void SampleList();
+        IEnumerable<char> YieldReturnAlphabet(char startChar, char endChar);
+        IEnumerable<char> YieldTruncateAlphabet(char startChar, char endChar, char truncateChar);
     }
 }

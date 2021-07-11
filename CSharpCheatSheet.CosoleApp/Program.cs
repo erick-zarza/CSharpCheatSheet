@@ -16,13 +16,8 @@ namespace CSharpCheatSheet.ConsoleApp
             ICodepediaService codepediaService = service.GetService<ICodepediaService>();
 
             bool onlySelected = true;
-            codepediaService.RunInMain(onlySelected);
-
-            //var wordList = new List<string>() { "hot", "dot", "dog", "lot", "log", "cog" };
-            //// var result = algorithmService.LadderLength("hit", "cog", wordList);
-            //var result = FindLadders("hit", "cog", wordList);
-
-            //Console.WriteLine($"Assert: {JsonConvert.SerializeObject(result)}");
+            //codepediaService.RunInMain(onlySelected);
+            algorithmService.RunInMain(onlySelected);           
         }
 
         public static ServiceProvider BuildServices()

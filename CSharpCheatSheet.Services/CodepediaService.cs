@@ -49,6 +49,29 @@ namespace CSharpCheatSheet.Services
         }
 
 
+        #region Yield
+        public IEnumerable<char> YieldReturnAlphabet(char startChar, char endChar)
+        {
+            for (char c = startChar; c <= endChar; c++)
+            {
+                yield return c;
+            }
+        }
+
+        public IEnumerable<char> YieldTruncateAlphabet(char startChar, char endChar, char truncateChar)
+        {
+            for (char c = startChar; c <= endChar; c++)
+            {
+                yield return c;
+
+                if (c == truncateChar)
+                {
+                    yield break;
+                }
+            }
+        }
+        #endregion
+
         #region Arrays
         public void LoopArray()
         {
@@ -309,7 +332,7 @@ namespace CSharpCheatSheet.Services
                 {
                     //do something with letter 
                 } 
-             * */            
+             * */
         }
 
         private IEnumerable<char> GetAlphabet()
