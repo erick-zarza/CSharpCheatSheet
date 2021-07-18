@@ -18,16 +18,24 @@ namespace CSharpCheatSheet.Services
 
         public void RunInMain(bool onlySelected)
         {
-            Console.WriteLine("--- Insert Sort");
-            int[] arr2 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
-            int[] copyArray2 = new int[10]; // need to copy if one unsorted ref sticks
-            Array.Copy(arr2, copyArray2, 10);
-            int[] arrSorted2 = InsertSort(copyArray2);
-            Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr2)}");
-            Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted2)}\n");
+            Console.WriteLine("--- AWS Interview for DevOpsWJson: 2nd largest, second smallest");
+            int[] arr3 = new int[] { 5, 5, 6, 7, 8, 4, 5, 7, 4, 1, 1, 33, 88, 87, 67, 741, 845, 2, 9, 0, 845 };
+            int[] copyArray3 = new int[arr3.Length]; // need to copy if one unsorted ref sticks
+            Array.Copy(arr3, copyArray3, arr3.Length);
+            (int, int) arrSorted3 = SecondLargestSecondSmallest(copyArray3);
+            Console.WriteLine($"Array: {JsonConvert.SerializeObject(arr3)}");
+            Console.WriteLine($"Second Smallest/Second Largest: {JsonConvert.SerializeObject(arrSorted3)}\n");
 
             if (!onlySelected)
             {
+                Console.WriteLine("--- Insert Sort");
+                int[] arr2 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+                int[] copyArray2 = new int[10]; // need to copy if one unsorted ref sticks
+                Array.Copy(arr2, copyArray2, 10);
+                int[] arrSorted2 = InsertSort(copyArray2);
+                Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr2)}");
+                Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted2)}\n");
+
                 Console.WriteLine("--- Selection Sort");
                 int[] arr1 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
                 int[] copyArray1 = new int[10]; // need to copy if one unsorted ref sticks
@@ -44,6 +52,58 @@ namespace CSharpCheatSheet.Services
                 Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr)}");
                 Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted)}\n");
             }
+        }
+
+        public (int, int) SecondLargestSecondSmallest(int[] arr)
+        {
+            // Init local variables.
+            int min = int.MaxValue;
+            int max = int.MinValue;
+            int secondMin = min;
+            int secondMax = max;
+            (int min, int max) secondMinMax = (0, 0);
+            int n = arr.Length;
+
+            // If not at least 2 return empty tuple.
+            if (n < 2)
+                return secondMinMax;
+
+            for (int i = 0; i < n; i++)
+            {
+                int current = arr[i];
+
+                if (current < secondMin)
+                {
+                    if (current < min)
+                    {
+                        secondMin = min;
+                        min = current;
+                    }
+                    else if (current > min)
+                    {
+                        secondMin = current;
+                    }
+                }
+
+                if (current > secondMax)
+                {
+                    if (current > max)
+                    {
+                        secondMax = max;
+                        max = current;
+                    }
+                    else if (current < max)
+                    {
+                        secondMax = current;
+                    }
+                }
+
+                secondMinMax.min = secondMin;
+                secondMinMax.max = secondMax;
+            }
+
+            // Dictionary indicating min and max would be more explicit, but O(n) worst in space, and wanted to practice tuple.
+            return secondMinMax;
         }
 
         public int[] InsertSort(int[] arr)

@@ -11,6 +11,7 @@ namespace CSharpCheatSheet.Services.Interfaces
         int RomanToInt(string s);
         int RomanToInt2(string s);
         void RunInMain(bool onlySelected);
+        (int min, int max) SecondLargestSecondSmallest(int[] arr);
         int[] SelectionSort(int[] arr);
     }
 }

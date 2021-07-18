@@ -32,6 +32,21 @@ namespace CSharpCheatSheet.UnitTests
         private ITestOutputHelper Output { get; }
 
         [Fact]
+        public void SecondMinSecondMax_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 5, 6, 7, 8, 4, 5, 7, 4, 1, 1, 33, 88, 87, 67, 845, 2, 9 };
+            (int min, int max) expected = (2, 88);
+
+            // Act
+            var tupleMinMax = AlgorithmService.SecondLargestSecondSmallest(arr);
+
+            // Assert
+            tupleMinMax.min.Should().Be(expected.min);
+            tupleMinMax.max.Should().Be(expected.max);
+        }
+
+        [Fact]
         public void InsertSort_Success()
         {
             // Arrange
