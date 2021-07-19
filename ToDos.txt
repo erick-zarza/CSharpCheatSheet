@@ -1,0 +1,4 @@
+- finish merge
+- reverse sort https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
+- typeoff
+- heaviest ball, might not be programming, but aptitude

@@ -8,6 +8,10 @@ namespace CSharpCheatSheet.Services.Interfaces
         int FirstUniqChar(string s);
         int[] InsertSort(int[] arr);
         int LadderLength(string beginWord, string endWord, IList<string> wordList);
+        string ReverseWordLeftRight(string word);
+        string ReverseWordRecursive(string word);
+        string ReverseWordSwapper(string word);
+        string ReverseWordWStack(string word);
         int RomanToInt(string s);
         int RomanToInt2(string s);
         void RunInMain(bool onlySelected);

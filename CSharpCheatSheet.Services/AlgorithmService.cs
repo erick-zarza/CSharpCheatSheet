@@ -18,16 +18,40 @@ namespace CSharpCheatSheet.Services
 
         public void RunInMain(bool onlySelected)
         {
-            Console.WriteLine("--- AWS Interview for DevOpsWJson: 2nd largest, second smallest");
-            int[] arr3 = new int[] { 5, 5, 6, 7, 8, 4, 5, 7, 4, 1, 1, 33, 88, 87, 67, 741, 845, 2, 9, 0, 845 };
-            int[] copyArray3 = new int[arr3.Length]; // need to copy if one unsorted ref sticks
-            Array.Copy(arr3, copyArray3, arr3.Length);
-            (int, int) arrSorted3 = SecondLargestSecondSmallest(copyArray3);
-            Console.WriteLine($"Array: {JsonConvert.SerializeObject(arr3)}");
-            Console.WriteLine($"Second Smallest/Second Largest: {JsonConvert.SerializeObject(arrSorted3)}\n");
+            Console.WriteLine("--- Microsoft: Reverse a word left right");
+            string word3 = "someconcatenatedwordstoreverseyes";
+            var reversedWord3 = this.ReverseWordLeftRight(word3);
+            Console.WriteLine($"Word: {word3}");
+            Console.WriteLine($"ReversedWord: {reversedWord3}\n");
+
+            Console.WriteLine("--- Microsoft: Reverse a word Recursive");
+            string word2 = "someconcatenatedwordstoreverseyes";
+            var reversedWord2 = this.ReverseWordRecursive(word2);
+            Console.WriteLine($"Word: {word2}");
+            Console.WriteLine($"ReversedWord: {reversedWord2}\n");
 
             if (!onlySelected)
             {
+                Console.WriteLine("--- Microsoft: Reverse a word Swapper");
+                string word1 = "someconcatenatedwordstoreverseyes";
+                var reversedWord1 = this.ReverseWordSwapper(word1);
+                Console.WriteLine($"Word: {word1}");
+                Console.WriteLine($"ReversedWord: {reversedWord1}\n");
+
+                Console.WriteLine("--- Microsoft: Reverse a word Stack");
+                string word = "someconcatenatedwordstoreverseyes";
+                var reversedWord = this.ReverseWordWStack(word);
+                Console.WriteLine($"Word: {word}");
+                Console.WriteLine($"ReversedWord: {reversedWord}\n");
+
+                Console.WriteLine("--- AWS Interview for DevOpsWJson: 2nd largest, second smallest");
+                int[] arr3 = new int[] { 5, 5, 6, 7, 8, 4, 5, 7, 4, 1, 1, 33, 88, 87, 67, 741, 845, 2, 9, 0, 845 };
+                int[] copyArray3 = new int[arr3.Length]; // need to copy if one unsorted ref sticks
+                Array.Copy(arr3, copyArray3, arr3.Length);
+                (int, int) arrSorted3 = SecondLargestSecondSmallest(copyArray3);
+                Console.WriteLine($"Array: {JsonConvert.SerializeObject(arr3)}");
+                Console.WriteLine($"Second Smallest/Second Largest: {JsonConvert.SerializeObject(arrSorted3)}\n");
+
                 Console.WriteLine("--- Insert Sort");
                 int[] arr2 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
                 int[] copyArray2 = new int[10]; // need to copy if one unsorted ref sticks
@@ -54,7 +78,105 @@ namespace CSharpCheatSheet.Services
             }
         }
 
-        public (int, int) SecondLargestSecondSmallest(int[] arr)
+        public string ReverseWordLeftRight(string word)
+        {
+            ///https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
+            /// Using stack would be 
+            /// Time complexity : O(n) 
+            /// Auxiliary Space : O(1)
+
+            int n = word.Length;
+
+            /// If evens last two will swap, if odds no need to swap the unaccounted
+            /// for of the int div truncating decimal since it is the middle one.
+            char[] arr = word.ToCharArray();
+
+            for (int i = 0; i < n / 2; i++)
+            {
+                char temp = arr[(n - 1) - i];
+                arr[(n - 1) - i] = arr[i];
+                arr[i] = temp;
+            }
+
+            return string.Join("", arr);
+        }
+
+        public string ReverseWordRecursive(string word)
+        {
+            ///https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
+            /// Using stack would be 
+            /// Time complexity : O(n) 
+            /// Auxiliary Space : O(1)
+
+            int n = word.Length;
+
+            /// If evens last two will swap, if odds no need to swap the unaccounted
+            /// for of the int div truncating decimal since it is the middle one.
+            char[] arr = word.ToCharArray();
+
+            for (int i = 0; i < n / 2; i++)
+            {
+                char temp = arr[(n - 1) - i];
+                arr[(n - 1) - i] = arr[i];
+                arr[i] = temp;
+            }
+
+            return string.Join("", arr);
+        }
+
+        public string ReverseWordSwapper(string word)
+        {
+            /// Using stack would be 
+            /// Time complexity : O(n) 
+            /// Auxiliary Space : O(1)
+
+            int n = word.Length;
+
+            /// If evens last two will swap, if odds no need to swap the unaccounted
+            /// for of the int div truncating decimal since it is the middle one.
+            char[] arr = word.ToCharArray();
+
+            for (int i = 0; i < n / 2; i++)
+            {
+                char temp = arr[(n - 1) - i];
+                arr[(n - 1) - i] = arr[i];
+                arr[i] = temp;
+            }
+
+            return string.Join("", arr);
+        }
+
+        public string ReverseWordWStack(string word)
+        {
+            /// Using stack would be 
+            /// Time complexity : O(n) 
+            /// Auxiliary Space : O(n)
+
+            int n = word.Length;
+            char[] charArr = word.ToCharArray();
+
+            /// Stack (LIFO): last in first out.
+            Stack<char> stack = new Stack<char>();
+
+            /// Stack<char> stack = new Stack<char>(charArr); coud do it this way, but bottom way shows push explicitly.
+            for (int i = 0; i < n; i++)
+            {
+                stack.Push(charArr[i]);
+            }
+
+            for (int i = 0; i < n; i++)
+            {
+                /// Can do peek pop, or straight pop.
+                //charArr[i] = stack.Peek();
+                //stack.Pop();
+
+                charArr[i] = stack.Pop();
+            }
+
+            return string.Join("", charArr);
+        }       
+
+                public (int, int) SecondLargestSecondSmallest(int[] arr)
         {
             // Init local variables.
             int min = int.MaxValue;

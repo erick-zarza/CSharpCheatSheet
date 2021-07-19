@@ -6,6 +6,7 @@ using CSharpCheatSheet.Services.Interfaces;
 using Xunit.Abstractions;
 using Microsoft.Extensions.Logging;
 using FluentAssertions;
+using System;
 
 namespace CSharpCheatSheet.UnitTests
 {
@@ -30,6 +31,57 @@ namespace CSharpCheatSheet.UnitTests
         public IAlgorithmService AlgorithmService { get; set; }
 
         private ITestOutputHelper Output { get; }
+
+        [Fact]
+        public void ReverseWordWLeftRight()
+        {
+            // Arrange
+            string word = "someconcatenatedwordstoreverseyes";
+            char[] chars = word.ToCharArray();
+            Array.Reverse<char>(chars);
+            string expected = new string(chars);
+            //string expected = string.join("", chars); //alternative
+
+            // Act
+            var result = AlgorithmService.ReverseWordLeftRight(word);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReverseWordWRecursive()
+        {
+            // Arrange
+            string word = "someconcatenatedwordstoreverseyes";
+            char[] chars = word.ToCharArray();
+            Array.Reverse<char>(chars);
+            string expected = new string(chars);
+            //string expected = string.join("", chars); //alternative
+
+            // Act
+            var result = AlgorithmService.ReverseWordRecursive(word);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReverseWordWStack()
+        {
+            // Arrange
+            string word = "someconcatenatedwordstoreverse";
+            char[] chars = word.ToCharArray();
+            Array.Reverse<char>(chars);
+            string expected = new string(chars);
+            //string expected = string.join("", chars); //alternative
+
+            // Act
+            var result = AlgorithmService.ReverseWordWStack(word);
+
+            // Assert
+            result.Should().Be(expected);
+        }        
 
         [Fact]
         public void SecondMinSecondMax_Success()
