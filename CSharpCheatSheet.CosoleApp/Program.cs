@@ -16,7 +16,7 @@ namespace CSharpCheatSheet.ConsoleApp
             ICodepediaService codepediaService = service.GetService<ICodepediaService>();
 
             bool onlySelected = true;
-            //codepediaService.RunInMain(onlySelected);
+            codepediaService.RunInMain(onlySelected);
             algorithmService.RunInMain(onlySelected);           
         }
 

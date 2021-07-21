@@ -29,14 +29,15 @@ namespace CSharpCheatSheet.Services
 
         public void RunInMain(bool onlySelected)
         {
-            LoopArray();
-            DemoArray();
-            DemoBiDimendionalArray();
-            DemoJaggedArray();
-            MultidimensionaConbineJaggedArray();
 
+            showIncrementDecrement(10);
             if (!onlySelected)
             {
+                LoopArray();
+                DemoArray();
+                DemoBiDimendionalArray();
+                DemoJaggedArray();
+                MultidimensionaConbineJaggedArray();
                 BuildAlphabet();
                 SampleStringBuilderWithNoText();
                 SampleStringBuilder();
@@ -48,6 +49,20 @@ namespace CSharpCheatSheet.Services
             }
         }
 
+        #region incrementDecrement
+        public void showIncrementDecrement(int i)
+        {
+
+            int a = i;
+            int x = ++a;
+            Console.WriteLine($"i:{i} a:{a} x:{x}");
+
+            int b = i;
+            int y = b++;
+            Console.WriteLine($"i:{i} b:{b} y:{y}");
+
+        }
+        #endregion
 
         #region Yield
         public IEnumerable<char> YieldReturnAlphabet(char startChar, char endChar)
@@ -343,7 +358,6 @@ namespace CSharpCheatSheet.Services
             }
         }
         #endregion
-
 
         #region StringBuilder
         public void SampleStringBuilder()

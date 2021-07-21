@@ -33,6 +33,37 @@ namespace CSharpCheatSheet.UnitTests
         private ITestOutputHelper Output { get; }
 
         [Fact]
+        public void RecursiveFactorial()
+        {
+            // Arrange
+            var actual = 5;
+            var expected = 120;
+     
+            // Act
+            var result = AlgorithmService.RecursiveFactorial(actual);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
+        public void ReverseWordIterativeTwoPointers()
+        {
+            // Arrange
+            string word = "someconcatenatedwordstoreverseyes";
+            char[] chars = word.ToCharArray();
+            Array.Reverse<char>(chars);
+            string expected = new string(chars);
+            //string expected = string.join("", chars); //alternative
+
+            // Act
+            var result = AlgorithmService.ReverseWordTwoPointers(word);
+
+            // Assert
+            result.Should().Be(expected);
+        }
+
+        [Fact]
         public void ReverseWordWLeftRight()
         {
             // Arrange
@@ -60,7 +91,7 @@ namespace CSharpCheatSheet.UnitTests
             //string expected = string.join("", chars); //alternative
 
             // Act
-            var result = AlgorithmService.ReverseWordRecursive(word);
+            var result = AlgorithmService.ReverseWordRecursive(word, 0);
 
             // Assert
             result.Should().Be(expected);
@@ -81,7 +112,7 @@ namespace CSharpCheatSheet.UnitTests
 
             // Assert
             result.Should().Be(expected);
-        }        
+        }
 
         [Fact]
         public void SecondMinSecondMax_Success()
@@ -99,13 +130,41 @@ namespace CSharpCheatSheet.UnitTests
         }
 
         [Fact]
+        public void QuickSort_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+
+            // Act
+            int[] sortedArr = AlgorithmService.QuickSort(arr);
+
+            // Assert
+            sortedArr.Should().BeInAscendingOrder();
+
+        }
+
+        [Fact]
+        public void MergeSort_Success()
+        {
+            // Arrange
+            int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+
+            // Act
+            int[] sortedArr = AlgorithmService.MergeSort(arr);
+
+            // Assert
+            sortedArr.Should().BeInAscendingOrder();
+
+        }
+
+        [Fact]
         public void InsertSort_Success()
         {
             // Arrange
             int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
 
             // Act
-            int[] sortedArr = AlgorithmService.InsertSort(arr);
+            int[] sortedArr = AlgorithmService.MergeSort(arr);
 
             // Assert
             sortedArr.Should().BeInAscendingOrder();

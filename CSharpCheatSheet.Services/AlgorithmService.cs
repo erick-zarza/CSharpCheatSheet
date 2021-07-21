@@ -18,20 +18,26 @@ namespace CSharpCheatSheet.Services
 
         public void RunInMain(bool onlySelected)
         {
-            Console.WriteLine("--- Microsoft: Reverse a word left right");
-            string word3 = "someconcatenatedwordstoreverseyes";
-            var reversedWord3 = this.ReverseWordLeftRight(word3);
-            Console.WriteLine($"Word: {word3}");
-            Console.WriteLine($"ReversedWord: {reversedWord3}\n");
-
-            Console.WriteLine("--- Microsoft: Reverse a word Recursive");
-            string word2 = "someconcatenatedwordstoreverseyes";
-            var reversedWord2 = this.ReverseWordRecursive(word2);
-            Console.WriteLine($"Word: {word2}");
-            Console.WriteLine($"ReversedWord: {reversedWord2}\n");
-
             if (!onlySelected)
             {
+                Console.WriteLine("--- Microsoft: Reverse a word Recursive");
+                string word2 = "122someconcatenatedwordstoreverseyes223";
+                var reversedWord2 = this.ReverseWordRecursive(word2, 0);
+                Console.WriteLine($"Word: {word2}");
+                Console.WriteLine($"ReversedWord: {reversedWord2}\n");
+
+                Console.WriteLine("--- Microsoft: Reverse a word Iterative 2 pointers");
+                string word4 = "123someconcatenatedwordstoreverseyes123";
+                var reversedWord4 = this.ReverseWordTwoPointers(word4);
+                Console.WriteLine($"Word: {word4}");
+                Console.WriteLine($"ReversedWord: {reversedWord4}\n");
+
+                Console.WriteLine("--- Microsoft: Reverse a word left right");
+                string word3 = "111someconcatenatedwordstoreverseyes111";
+                var reversedWord3 = this.ReverseWordLeftRight(word3);
+                Console.WriteLine($"Word: {word3}");
+                Console.WriteLine($"ReversedWord: {reversedWord3}\n");
+
                 Console.WriteLine("--- Microsoft: Reverse a word Swapper");
                 string word1 = "someconcatenatedwordstoreverseyes";
                 var reversedWord1 = this.ReverseWordSwapper(word1);
@@ -75,53 +81,122 @@ namespace CSharpCheatSheet.Services
                 int[] arrSorted = BubbleSort(copyArray);
                 Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(arr)}");
                 Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arrSorted)}\n");
+
+                Console.WriteLine("--- Recursive Factorial");
+                int num = 5;
+                var factorial = this.RecursiveFactorial(num);
+                Console.WriteLine($"num to factorial: {num}");
+                Console.WriteLine($"factorial: {factorial}\n");
+
+                Console.WriteLine("--- Merge Sort");
+                int[] unstoredArr = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+                int[] copyUnstoredAArray = new int[10]; // need to copy if one unsorted ref sticks
+                Array.Copy(unstoredArr, copyUnstoredAArray, 10);
+                int[] arraySorted = MergeSort(copyUnstoredAArray);
+                Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(unstoredArr)}");
+                Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arraySorted)}\n");
             }
+
+            Console.WriteLine("--- Quick Sort");
+            int[] unstoredArr1 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
+            int[] copyUnstoredAArray1 = new int[10]; // need to copy if one unsorted ref sticks
+            Array.Copy(unstoredArr1, copyUnstoredAArray1, 10);
+            int[] arraySorted1 = MergeSort(copyUnstoredAArray1);
+            Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(unstoredArr1)}");
+            Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arraySorted1)}\n");
+        }
+
+        public int RecursiveFactorial(int num)
+        {
+            /// 5! = 120
+            /// 5 * 4! = 120
+            /// 5 * 4 * 3! = 120
+            /// 5 * 4 * 3 * 2! = 120
+            /// 5 * 4 * 3 * 2 * 1! = 120
+            /// 5 * 4 * 3 * 2 * 1 * 0! = 120 -- no ned to get here as 0 and 1 factorial is 1, so when 0 it is the exit, if not becomes eternal with a stack overflow error.
+            /// 
+            if (num == 0)
+                return 1; //0! == 0;
+
+            return num * RecursiveFactorial(num - 1); // no num-- because it grabs value first and then decreases
+        }
+
+        public string ReverseWordTwoPointers(string word)
+        {
+            ///https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
+            /// Using stack would be 
+            /// Time complexity : O(n) 
+            /// Auxiliary Space : O(1)
+
+            int n = word.Length;
+
+            /// If evens last two will swap, if odds no need to swap the unaccounted
+            /// for of the int div truncating decimal since it is the middle one.
+            char[] arr = word.ToCharArray();
+
+            for (int i = 0, j = n - 1; i < j; i++, j--)
+            {
+                char temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+
+            return string.Join("", arr);
         }
 
         public string ReverseWordLeftRight(string word)
         {
+            /// Same as Two pointers basically.
             ///https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
             /// Using stack would be 
             /// Time complexity : O(n) 
             /// Auxiliary Space : O(1)
 
-            int n = word.Length;
+            char[] temparray = word.ToCharArray();
+            int left, right = 0;
+            right = temparray.Length - 1;
 
-            /// If evens last two will swap, if odds no need to swap the unaccounted
-            /// for of the int div truncating decimal since it is the middle one.
-            char[] arr = word.ToCharArray();
-
-            for (int i = 0; i < n / 2; i++)
+            for (left = 0; left < right; left++, right--)
             {
-                char temp = arr[(n - 1) - i];
-                arr[(n - 1) - i] = arr[i];
-                arr[i] = temp;
+                // Swap values of left and right
+                char temp = temparray[left];
+                temparray[left] = temparray[right];
+                temparray[right] = temp;
             }
-
-            return string.Join("", arr);
+            return String.Join("", temparray);
         }
 
-        public string ReverseWordRecursive(string word)
+        public string ReverseWordRecursive(string word, int i)
         {
             ///https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
             /// Using stack would be 
             /// Time complexity : O(n) 
             /// Auxiliary Space : O(1)
 
-            int n = word.Length;
-
-            /// If evens last two will swap, if odds no need to swap the unaccounted
-            /// for of the int div truncating decimal since it is the middle one.
             char[] arr = word.ToCharArray();
-
-            for (int i = 0; i < n / 2; i++)
-            {
-                char temp = arr[(n - 1) - i];
-                arr[(n - 1) - i] = arr[i];
-                arr[i] = temp;
-            }
-
+            ReverseWordRecursiveInner(arr, i); //void not need to return since it is a arr are by ref.   
             return string.Join("", arr);
+        }
+
+        private void ReverseWordRecursiveInner(char[] arr, int i)
+        {
+            int n = arr.Length;
+
+            if (i == n / 2) // This is the exit, need this if not infinite loop.
+                return;
+
+            char temp = arr[(n - 1) - i];
+            arr[(n - 1) - i] = arr[i];
+            arr[i] = temp;
+            Console.WriteLine($"{i}"); // later stack over flow error
+            i++; //need here, for some reason if I do in function call won't work.
+            ReverseWordRecursiveInner(arr, i/*i+1 works ; i++ no work*/); // This is the "iterator"; i++ stack overflow
+
+            /*
+            Because return AddMethod(input1++, input2--); first passes your inputs, and THEN increments and decrements.
+
+            Try return AddMethod(++input1, --input2);
+            */
         }
 
         public string ReverseWordSwapper(string word)
@@ -174,9 +249,9 @@ namespace CSharpCheatSheet.Services
             }
 
             return string.Join("", charArr);
-        }       
+        }
 
-                public (int, int) SecondLargestSecondSmallest(int[] arr)
+        public (int, int) SecondLargestSecondSmallest(int[] arr)
         {
             // Init local variables.
             int min = int.MaxValue;
@@ -226,6 +301,98 @@ namespace CSharpCheatSheet.Services
 
             // Dictionary indicating min and max would be more explicit, but O(n) worst in space, and wanted to practice tuple.
             return secondMinMax;
+        }
+
+        public int[] QuickSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            MergeSortInternalSort(arr, 0, n - 1); // Can pass array as reference and not set value.
+
+            return arr;
+        }
+
+        public int[] MergeSort(int[] arr)
+        {
+            int n = arr.Length;
+
+            MergeSortInternalSort(arr, 0, n - 1); // Can pass array as reference and not set value.
+
+            return arr;
+        }
+
+        public void MergeSortInternalSort(int[] arr, int l, int r)
+        {
+            int n = arr.Length;
+
+            if (l < r) // Circuit breaker if no recursion goes infinite
+            {
+                int m = l + (r - l) / 2;//??? same results, but bottom one is easier.
+                //int m = (l + r) / 2;
+                Console.WriteLine($"l:{l},m:{m},r:{r}");
+                MergeSortInternalSort(arr, l, m); // now pass m as right.
+                MergeSortInternalSort(arr, m + 1, r); // now pass m+1 as left, the next one of m above.
+                MergeSortInternalMerge(arr, l, m, r);
+            }
+        }
+
+        public void MergeSortInternalMerge(int[] arr, int l, int m, int r)
+        {
+            // need to get 2 halves arrays, left and right, no seed to get lengths.
+            int nL = m - l + 1;
+            int nR = r - m;
+            Console.WriteLine($"nL:{nL},nR:{nR}");
+
+            int[] L = new int[nL];
+            int[] R = new int[nR];
+            int i = 0;
+            int j = 0;//initializing because of the first while
+
+            for (i = 0; i < nL; i++)
+            {
+                L[i] = arr[l + i];
+            }
+
+            for (j = 0; j < nR; j++)
+            {
+                R[j] = arr[m + 1 + j];
+            }
+
+            // Don't forget to reinitialize
+            i = 0;
+            j = 0;
+
+            // Need to switch and put into array.
+            int k = l;
+            while (i < nL && j < nR)
+            {
+                if (L[i] <= R[j])
+                {                    
+                    arr[k] = L[i];
+                    i++; // First action and then increment, not viceversa as I had.
+                }
+                else
+                {
+                    arr[k] = R[j];
+                    j++;
+                }
+
+                k++;
+            }
+
+            while (i < nL)
+            {
+                arr[k] = L[i];
+                i++;
+                k++;
+            }
+
+            while (j < nR)
+            {
+                arr[k] = R[j];
+                j++;
+                k++;
+            }
         }
 
         public int[] InsertSort(int[] arr)

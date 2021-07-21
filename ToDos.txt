@@ -1,4 +1,6 @@
+- reference type vs value type,
+- and structs
+- Action --???
 - finish merge
-- reverse sort https://www.geeksforgeeks.org/program-reverse-string-iterative-recursive/
 - typeoff
-- heaviest ball, might not be programming, but aptitude
+- https://cses.fi/book/book.pdf
