@@ -98,12 +98,11 @@ namespace CSharpCheatSheet.Services
             }
 
             Console.WriteLine("--- Quick Sort");
-            int[] unstoredArr1 = new int[10] { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
-            int[] copyUnstoredAArray1 = new int[10]; // need to copy if one unsorted ref sticks
-            Array.Copy(unstoredArr1, copyUnstoredAArray1, 10);
-            int[] arraySorted1 = MergeSort(copyUnstoredAArray1);
+            int[] unstoredArr1 = { 7, 1, 2, 4, 5, 99, 0, 3, 5, 8, 66, 8, 55, 8, 1 };
             Console.WriteLine($"Unsorted array: {JsonConvert.SerializeObject(unstoredArr1)}");
-            Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(arraySorted1)}\n");
+            QuickSort(unstoredArr1, 0, unstoredArr1.Length - 1);
+            
+            Console.WriteLine($"Sorted array: {JsonConvert.SerializeObject(unstoredArr1)}\n");
         }
 
         public int RecursiveFactorial(int num)
@@ -303,13 +302,57 @@ namespace CSharpCheatSheet.Services
             return secondMinMax;
         }
 
-        public int[] QuickSort(int[] arr)
+        public void QuickSort(int[] arr, int low, int high)
         {
-            int n = arr.Length;
+            if (low < high)
+            {
 
-            MergeSortInternalSort(arr, 0, n - 1); // Can pass array as reference and not set value.
+                // pi is partitioning index, arr[p]
+                // is now at right place
+                int pi = Partition(arr, low, high);
 
-            return arr;
+                // Separately sort elements before
+                // partition and after partition
+                QuickSort(arr, low, pi - 1);
+                QuickSort(arr, pi + 1, high);
+            }
+        }
+
+        static int Partition(int[] arr, int low, int high)
+        {
+
+            // pivot
+            int pivot = arr[high];
+
+            // Index of smaller element and
+            // indicates the right position
+            // of pivot found so far
+            int i = (low - 1);
+
+            for (int j = low; j <= high - 1; j++)
+            {
+
+                // If current element is smaller
+                // than the pivot
+                if (arr[j] < pivot)
+                {
+
+                    // Increment index of
+                    // smaller element
+                    i++;
+                    Swap(arr, i, j);
+                }
+            }
+
+            Swap(arr, i + 1, high);
+            return (i + 1);
+        }
+
+        private static void Swap(int[] arr, int i, int j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
 
         public int[] MergeSort(int[] arr)

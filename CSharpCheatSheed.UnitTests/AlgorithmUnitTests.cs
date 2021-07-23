@@ -136,10 +136,10 @@ namespace CSharpCheatSheet.UnitTests
             int[] arr = { 5, 6, 7, 8, 4, 5, 7, 2, 1, 1 };
 
             // Act
-            int[] sortedArr = AlgorithmService.QuickSort(arr);
+            AlgorithmService.QuickSort(arr, 0, arr.Length -1);
 
             // Assert
-            sortedArr.Should().BeInAscendingOrder();
+            arr.Should().BeInAscendingOrder();
 
         }
 

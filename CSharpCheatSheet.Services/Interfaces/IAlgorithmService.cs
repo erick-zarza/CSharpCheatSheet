@@ -19,6 +19,6 @@ namespace CSharpCheatSheet.Services.Interfaces
         void RunInMain(bool onlySelected);
         (int min, int max) SecondLargestSecondSmallest(int[] arr);
         int[] SelectionSort(int[] arr);
-        int[] QuickSort(int[] arr);
+        void QuickSort(int[] arr, int l, int r);
     }
 }
